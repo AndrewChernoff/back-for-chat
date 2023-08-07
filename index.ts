@@ -82,18 +82,20 @@ io.on("connection", (socket:any) => {
 
   socket.emit('init-messages', messagesStore)
 
-  socket.on('client-name-sent', (name: string) => {
-    if(typeof name !== 'string') {
+  socket.on('client-name-sent', (name: string, successFn: (value: string) => void) => {
+    if(typeof name !== 'string' || name.length > 20 ) {
+      successFn('Name should be less than 20 letters')
+
       return
     }
     const user = users.get(socket)
      user.name = name
   })
 
-  socket.on('client-message-sent', (data: any) => {
+  socket.on('client-message-sent', (data: string, ) => {
 
     if(typeof data !== 'string') {
-      return
+       return
     }
 
     const user = users.get(socket)
