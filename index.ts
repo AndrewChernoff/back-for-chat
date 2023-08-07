@@ -52,7 +52,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || 3020
+const port = process.env.PORT || 3020
 
 
 let messagesStore:any[] = [
@@ -113,6 +113,6 @@ io.on("connection", (socket:any) => {
   })
 });
 
-server.listen(PORT, () => {
+server.listen(port, () => {
   console.log("SERVER IS RUNNING");
 });
